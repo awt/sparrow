@@ -295,7 +295,6 @@ public class DownloadVerifierDialog extends Dialog<ButtonBar.ButtonData> {
             String message = result.userId() + " on " + signatureDateFormat.format(result.signatureTimestamp()) + (result.expired() ? " (key expired)" : "");
             signedBy.setText(message);
             signedBy.setGraphic(result.expired() ? GlyphUtils.getWarningGlyph() : GlyphUtils.getSuccessGlyph());
-            TooltipUtil.setTooltip(signedBy, new Tooltip(result.fingerprint()));
 
             if(!result.expired() && result.keySource() != PGPKeySource.USER) {
                 publicKeyDisabled.set(true);
@@ -353,21 +352,18 @@ public class DownloadVerifierDialog extends Dialog<ButtonBar.ButtonData> {
                     if(calculatedHash.equalsIgnoreCase(manifestHash)) {
                         releaseHash.setText("Matched manifest hash");
                         releaseHash.setGraphic(GlyphUtils.getSuccessGlyph());
-                        TooltipUtil.setTooltip(releaseHash, new Tooltip(calculatedHash));
                         releaseVerified.setText("Ready to install ");
                         releaseVerified.setGraphic(GlyphUtils.getSuccessGlyph());
                         releaseLink.setText(releaseFile.getName());
                     } else if(manifestHash == null) {
                         releaseHash.setText("Could not find manifest hash for " + releaseFile.getName());
                         releaseHash.setGraphic(GlyphUtils.getFailureGlyph());
-                        TooltipUtil.setTooltip(releaseHash, new Tooltip("Manifest hashes provided for:\n" + manifestMap.keySet().stream().map(File::getName).collect(Collectors.joining("\n"))));
                         releaseVerified.setText("Cannot verify " + releaseFile.getName());
                         releaseVerified.setGraphic(GlyphUtils.getFailureGlyph());
                         releaseLink.setText("");
                     } else {
                         releaseHash.setText("Did not match manifest hash");
                         releaseHash.setGraphic(GlyphUtils.getFailureGlyph());
-                        TooltipUtil.setTooltip(releaseHash, new Tooltip("Calculated Hash: " + calculatedHash + "\nManifest Hash: " + manifestHash));
                         releaseVerified.setText("Cannot verify " + releaseFile.getName());
                         releaseVerified.setGraphic(GlyphUtils.getFailureGlyph());
                         releaseLink.setText("");
@@ -375,7 +371,6 @@ public class DownloadVerifierDialog extends Dialog<ButtonBar.ButtonData> {
                 } catch(IOException | InvalidManifestException e) {
                     releaseHash.setText("Could not read manifest");
                     releaseHash.setGraphic(GlyphUtils.getFailureGlyph());
-                    TooltipUtil.setTooltip(releaseHash, new Tooltip(e.getMessage()));
                     releaseVerified.setText("Cannot verify " + releaseFile.getName());
                     releaseVerified.setGraphic(GlyphUtils.getFailureGlyph());
                     releaseLink.setText("");
@@ -384,7 +379,6 @@ public class DownloadVerifierDialog extends Dialog<ButtonBar.ButtonData> {
             hashService.setOnFailed(event -> {
                 releaseHash.setText("Could not calculate manifest");
                 releaseHash.setGraphic(GlyphUtils.getFailureGlyph());
-                TooltipUtil.setTooltip(releaseHash, new Tooltip(event.getSource().getException().getMessage()));
                 releaseVerified.setText("Cannot verify " + releaseFile.getName());
                 releaseVerified.setGraphic(GlyphUtils.getFailureGlyph());
                 releaseLink.setText("");

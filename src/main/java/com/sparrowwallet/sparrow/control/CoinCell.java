@@ -65,7 +65,6 @@ class CoinCell extends TreeTableCell<Entry, Number> implements ConfirmationsList
                 tooltip.setValue(btcValue + " " + BitcoinUnit.BTC.getLabel());
                 setText(satsValue);
             }
-            TooltipUtil.setTooltip(this, tooltip);
             contextMenu.updateAmount(amount);
             setContextMenu(contextMenu);
 

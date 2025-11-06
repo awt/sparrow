@@ -61,7 +61,6 @@ public class MnemonicWalletKeystoreImportPane extends MnemonicKeystorePane {
             discoverWallet();
         });
         discoverButton.managedProperty().bind(discoverButton.visibleProperty());
-        TooltipUtil.setTooltip(discoverButton, new Tooltip("Look for existing transactions from the provided word list"));
         discoverButton.visibleProperty().bind(AppServices.onlineProperty());
 
         importButton = new Button("Import Wallet");
@@ -86,10 +85,8 @@ public class MnemonicWalletKeystoreImportPane extends MnemonicKeystorePane {
             } catch(ImportException e) {
                 if(e.getCause() instanceof MnemonicException.MnemonicTypeException) {
                     invalidLabel.setText("Unsupported Electrum seed");
-                    TooltipUtil.setTooltip(invalidLabel, new Tooltip("Seeds created in Electrum do not follow the BIP39 standard. Import the Electrum wallet file directly."));
                 } else {
                     invalidLabel.setText("Invalid checksum");
-                    invalidLabel.setTooltip(null);
                 }
             }
         }

@@ -121,7 +121,6 @@ public class WalletImportDialog extends Dialog<Wallet> {
             Glyph glyph = new Glyph(FontAwesome5.FONT_NAME, FontAwesome5.Glyph.EXCLAMATION_CIRCLE);
             glyph.getStyleClass().add("failure");
             scanButton.setGraphic(glyph);
-            TooltipUtil.setTooltip(scanButton, new Tooltip(workerStateEvent.getSource().getException().getMessage()));
         });
         enumerateService.start();
     }

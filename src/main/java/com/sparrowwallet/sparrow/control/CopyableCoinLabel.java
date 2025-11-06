@@ -72,7 +72,6 @@ public class CopyableCoinLabel extends CopyableLabel {
     }
 
     private void setValueAsText(Long value, UnitFormat unitFormat, BitcoinUnit bitcoinUnit) {
-        TooltipUtil.setTooltip(this, tooltip);
         setContextMenu(contextMenu);
 
         if(unitFormat == null) {

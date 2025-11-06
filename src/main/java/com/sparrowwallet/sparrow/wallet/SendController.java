@@ -202,9 +202,6 @@ public class SendController extends WalletFormController implements Initializabl
                 feeRate.setText("Unknown");
             }
 
-            Tooltip tooltip = new Tooltip("Target inclusion within " + target + " blocks");
-            TooltipUtil.setTooltip(targetBlocks, tooltip);
-
             userFeeSet.set(false);
             for(Tab tab : paymentTabs.getTabs()) {
                 PaymentController controller = (PaymentController)tab.getUserData();
@@ -826,8 +823,6 @@ public class SendController extends WalletFormController implements Initializabl
         int index = TARGET_BLOCKS_RANGE.indexOf(target);
         targetBlocks.setValue(index);
         blockTargetFeeRatesChart.select(target);
-        Tooltip tooltip = new Tooltip("Target inclusion within " + target + " blocks");
-        TooltipUtil.setTooltip(targetBlocks, tooltip);
         targetBlocks.valueProperty().addListener(targetBlocksListener);
     }
 
@@ -910,8 +905,6 @@ public class SendController extends WalletFormController implements Initializabl
             if(thisRate > effectiveRate) {
                 UnitFormat format = Config.get().getUnitFormat() == null ? UnitFormat.DOT : Config.get().getUnitFormat();
                 String strEffectiveRate = format.getCurrencyFormat().format(effectiveRate);
-                Tooltip tooltip = new Tooltip("CPFP (Child Pays For Parent)\n" + strEffectiveRate + " sats/vB effective rate");
-                TooltipUtil.setTooltip(cpfpFeeRate, tooltip);
                 cpfpFeeRate.setVisible(true);
                 cpfpFeeRate.setText(strEffectiveRate + " sats/vB (CPFP)");
             } else {
@@ -928,7 +921,6 @@ public class SendController extends WalletFormController implements Initializabl
             Double minFeeRate = targetBlocksFeeRates.get(Integer.MAX_VALUE);
             if(minFeeRate > 1.0 && feeRateAmt < minFeeRate) {
                 feeRatePriority.setText("Below Minimum");
-                TooltipUtil.setTooltip(feeRatePriority, new Tooltip("Transactions at this fee rate are currently being purged from the default sized mempool"));
                 feeRatePriorityGlyph.setStyle("-fx-text-fill: #a0a1a7cc");
                 feeRatePriorityGlyph.setIcon(FontAwesome5.Glyph.EXCLAMATION_CIRCLE);
                 return;
@@ -937,7 +929,6 @@ public class SendController extends WalletFormController implements Initializabl
             Double lowestBlocksRate = targetBlocksFeeRates.get(TARGET_BLOCKS_RANGE.get(TARGET_BLOCKS_RANGE.size() - 1));
             if(lowestBlocksRate >= minFeeRate && feeRateAmt < (minFeeRate + ((lowestBlocksRate - minFeeRate) / 2)) && !isPayjoinTx()) {
                 feeRatePriority.setText("Try Then Replace");
-                TooltipUtil.setTooltip(feeRatePriority, new Tooltip("Send a transaction, verify it appears in the destination wallet, then RBF to get it confirmed or sent to another address"));
                 feeRatePriorityGlyph.setStyle("-fx-text-fill: #7eb7c9cc");
                 feeRatePriorityGlyph.setIcon(FontAwesome5.Glyph.PLUS_CIRCLE);
                 return;
@@ -951,23 +942,19 @@ public class SendController extends WalletFormController implements Initializabl
                 Double highestBlocksRate = targetBlocksFeeRates.get(TARGET_BLOCKS_RANGE.get(0));
                 if(highestBlocksRate < maxFeeRate && feeRateAmt > (highestBlocksRate + ((maxFeeRate - highestBlocksRate) / 10))) {
                     feeRatePriority.setText("Overpaid");
-                    TooltipUtil.setTooltip(feeRatePriority, new Tooltip("Transaction fees at this rate are likely higher than necessary"));
                     feeRatePriorityGlyph.setStyle("-fx-text-fill: #c8416499");
                     feeRatePriorityGlyph.setIcon(FontAwesome5.Glyph.EXCLAMATION_CIRCLE);
                 } else {
                     feeRatePriority.setText("High Priority");
-                    TooltipUtil.setTooltip(feeRatePriority, new Tooltip("Typically confirms within minutes"));
                     feeRatePriorityGlyph.setStyle("-fx-text-fill: #c8416499");
                     feeRatePriorityGlyph.setIcon(FontAwesome5.Glyph.CIRCLE);
                 }
             } else if(targetBlocks < FeeRatesSource.BLOCKS_IN_HOUR) {
                 feeRatePriority.setText("Medium Priority");
-                TooltipUtil.setTooltip(feeRatePriority, new Tooltip("Typically confirms within an hour or two"));
                 feeRatePriorityGlyph.setStyle("-fx-text-fill: #fba71b99");
                 feeRatePriorityGlyph.setIcon(FontAwesome5.Glyph.CIRCLE);
             } else {
                 feeRatePriority.setText("Low Priority");
-                TooltipUtil.setTooltip(feeRatePriority, new Tooltip("Typically confirms in a day or longer"));
                 feeRatePriorityGlyph.setStyle("-fx-text-fill: #41a9c999");
                 feeRatePriorityGlyph.setIcon(FontAwesome5.Glyph.CIRCLE);
             }
@@ -1043,14 +1030,8 @@ public class SendController extends WalletFormController implements Initializabl
     private void updatePrivacyAnalysis(WalletTransaction walletTransaction) {
         if(walletTransaction == null) {
             privacyAnalysis.setVisible(false);
-            privacyAnalysis.setTooltip(null);
         } else {
-            privacyAnalysis.setVisible(true);
-            Tooltip tooltip = new Tooltip();
-            tooltip.setShowDelay(new Duration(50));
-            tooltip.setShowDuration(Duration.INDEFINITE);
-            tooltip.setGraphic(new PrivacyAnalysisTooltip(walletTransaction));
-            TooltipUtil.setTooltip(privacyAnalysis, tooltip);
+            privacyAnalysis.setVisible(false);
         }
     }
 

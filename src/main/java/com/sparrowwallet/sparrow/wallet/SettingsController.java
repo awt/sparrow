@@ -329,13 +329,9 @@ public class SettingsController extends WalletFormController implements Initiali
             controller.getValidationSupport().validationResultProperty().addListener((o, oldValue, result) -> {
                 if(result.getErrors().isEmpty()) {
                     tab.getStyleClass().remove("tab-error");
-                    tab.setTooltip(null);
                 } else {
                     if(!tab.getStyleClass().contains("tab-error")) {
                         tab.getStyleClass().add("tab-error");
-                    }
-                    if(!Config.get().isDisableTooltips()) {
-                        tab.setTooltip(new Tooltip(result.getErrors().iterator().next().getText()));
                     }
                 }
             });

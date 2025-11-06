@@ -435,11 +435,6 @@ public class TransactionDiagram extends GridPane {
         pane.getChildren().add(group);
 
         glyph.getStyleClass().add("inputs-type");
-        Tooltip tooltip = new Tooltip(tooltipText);
-        tooltip.getStyleClass().add("transaction-tooltip");
-        tooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
-        tooltip.setShowDuration(Duration.INDEFINITE);
-        TooltipUtil.setTooltip(glyph, tooltip);
         stackPane.getChildren().addAll(pane, glyph);
 
         return stackPane;
@@ -529,17 +524,6 @@ public class TransactionDiagram extends GridPane {
                     }
                     tooltip.getStyleClass().add("input-label");
                 }
-                tooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
-                tooltip.setShowDuration(Duration.INDEFINITE);
-                tooltip.setWrapText(true);
-                Window activeWindow = AppServices.getActiveWindow();
-                if(activeWindow != null) {
-                    tooltip.setMaxWidth(activeWindow.getWidth());
-                }
-                if(!tooltip.getText().isEmpty()) {
-                    TooltipUtil.setTooltip(label, tooltip);
-                }
-
                 HBox inputBox = new HBox();
                 inputBox.setAlignment(Pos.CENTER_RIGHT);
                 inputBox.getChildren().add(label);
@@ -734,15 +718,6 @@ public class TransactionDiagram extends GridPane {
                     + getSatsValue(payment.getAmount()) + " sats to "
                     + (payment instanceof AdditionalPayment ? (isExpanded() ? "\n" : "(click to expand)\n") + payment : (toWallet == null ? (dnsPayment == null ? (payment.getLabel() == null ? (toNode != null ? toNode : (toBip47Wallet == null ? "external address" : toBip47Wallet.getDisplayName())) : payment.getLabel()) : dnsPayment.toString()) : toWallet.getFullDisplayName()) + "\n" + payment.getDisplayAddress())
                     + (walletTx.isDuplicateAddress(payment) ? " (Duplicate)" : ""));
-            recipientTooltip.getStyleClass().add("recipient-label");
-            recipientTooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
-            recipientTooltip.setShowDuration(Duration.INDEFINITE);
-            recipientTooltip.setWrapText(true);
-            Window activeWindow = AppServices.getActiveWindow();
-            if(activeWindow != null) {
-                recipientTooltip.setMaxWidth(activeWindow.getWidth());
-            }
-            TooltipUtil.setTooltip(recipientLabel, recipientTooltip);
             HBox paymentBox = new HBox();
             paymentBox.setAlignment(Pos.CENTER_LEFT);
             paymentBox.getChildren().add(recipientLabel);
@@ -778,11 +753,6 @@ public class TransactionDiagram extends GridPane {
             String changeDesc = changeAddress.toString().substring(0, 8) + "...";
             Label changeLabel = new Label(changeDesc, overGapLimit ? getChangeWarningGlyph() : getChangeGlyph());
             changeLabel.getStyleClass().addAll("output-label", "change-label");
-            Tooltip changeTooltip = new Tooltip("Change of " + getSatsValue(changeEntry.getValue()) + " sats to " + changeNode + "\n" + walletTx.getChangeAddress(changeNode).toString() + (overGapLimit ? "\nAddress is beyond the gap limit!" : ""));
-            changeTooltip.getStyleClass().add("change-label");
-            changeTooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
-            changeTooltip.setShowDuration(Duration.INDEFINITE);
-            TooltipUtil.setTooltip(changeLabel, changeTooltip);
             actionBox.getChildren().add(changeLabel);
 
             if(!isFinal()) {
@@ -791,8 +761,6 @@ public class TransactionDiagram extends GridPane {
                 nextChangeAddressButton.setOnAction(event -> {
                     EventManager.get().post(new ReplaceChangeAddressEvent(walletTx));
                 });
-                Tooltip replaceChangeTooltip = new Tooltip("Use next change address");
-                TooltipUtil.setTooltip(nextChangeAddressButton, replaceChangeTooltip);
                 Label replaceChangeLabel = new Label("", nextChangeAddressButton);
                 replaceChangeLabel.getStyleClass().add("replace-change-label");
                 replaceChangeLabel.setVisible(false);
@@ -836,12 +804,6 @@ public class TransactionDiagram extends GridPane {
         boolean highFee = (walletTx.getFeePercentage() > 0.1);
         Label feeLabel = highFee ? new Label("High Fee", getFeeWarningGlyph()) : new Label("Fee", getFeeGlyph());
         feeLabel.getStyleClass().addAll("output-label", "fee-label");
-        String percentage = walletTx.getFeePercentage() < 0.0001d ? "<0.01" : String.format("%.2f", walletTx.getFeePercentage() * 100.0);
-        Tooltip feeTooltip = new Tooltip(walletTx.getFee() < 0 ? "Unknown fee" : "Fee of " + getSatsValue(walletTx.getFee()) + " sats (" + percentage + "%)");
-        feeTooltip.getStyleClass().add("fee-tooltip");
-        feeTooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
-        feeTooltip.setShowDuration(Duration.INDEFINITE);
-        TooltipUtil.setTooltip(feeLabel, feeTooltip);
 
         HBox feeBox = new HBox();
         feeBox.setAlignment(Pos.CENTER_LEFT);
@@ -875,14 +837,6 @@ public class TransactionDiagram extends GridPane {
 
         String txDesc = "Transaction";
         Label txLabel = new Label(txDesc);
-        boolean isFinalized = walletTx.getTransaction().hasScriptSigs() || walletTx.getTransaction().hasWitnesses();
-        Tooltip tooltip = new Tooltip(walletTx.getTransaction().getLength() + " bytes\n"
-                + String.format("%.2f", walletTx.getTransaction().getVirtualSize()) + " vBytes"
-                + (walletTx.getFee() < 0 ? "" : "\n" + String.format("%.2f", walletTx.getFee() / walletTx.getTransaction().getVirtualSize()) + " sats/vB" + (isFinalized ? "" : " (non-final)")));
-        tooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
-        tooltip.setShowDuration(Duration.INDEFINITE);
-        tooltip.getStyleClass().add("transaction-tooltip");
-        TooltipUtil.setTooltip(txLabel, tooltip);
 
         txPane.getChildren().add(txLabel);
         txPane.getChildren().add(createSpacer());

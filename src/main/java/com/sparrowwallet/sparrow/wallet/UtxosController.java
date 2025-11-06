@@ -90,7 +90,6 @@ public class UtxosController extends WalletFormController implements Initializab
 
         clear.setDisable(true);
         sendSelected.setDisable(true);
-        TooltipUtil.setTooltip(sendSelected, new Tooltip("Send selected UTXOs. Use " + (OsType.getCurrent() == OsType.MACOS ? "Cmd" : "Ctrl") + "+click to select multiple." ));
 
         utxosTable.getSelectionModel().getSelectedIndices().addListener((ListChangeListener<Integer>) c -> {
             List<Entry> selectedEntries = utxosTable.getSelectionModel().getSelectedCells().stream().filter(tp -> tp.getTreeItem() != null).map(tp -> tp.getTreeItem().getValue()).collect(Collectors.toList());

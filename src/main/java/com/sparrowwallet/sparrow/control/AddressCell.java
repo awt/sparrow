@@ -41,10 +41,6 @@ public class AddressCell extends TreeTableCell<Entry, UtxoEntry.AddressStatus> {
                 Address address = addressStatus.getAddress();
                 setText(address.toString());
                 setContextMenu(new EntryCell.AddressContextMenu(address, utxoEntry.getOutputDescriptor(), new NodeEntry(utxoEntry.getWallet(), utxoEntry.getNode()), false, getTreeTableView()));
-                Tooltip tooltip = new Tooltip();
-                tooltip.setShowDelay(Duration.millis(250));
-                tooltip.setText(getTooltipText(utxoEntry, addressStatus.isDuplicate(), addressStatus.isDustAttack()));
-                TooltipUtil.setTooltip(this, tooltip);
                 getStyleClass().add("address-cell");
 
                 if(addressStatus.isDustAttack()) {

@@ -47,11 +47,6 @@ public class DateCell extends TreeTableCell<Entry, Entry> {
                     setContextMenu(null);
                 }
 
-                Tooltip tooltip = new Tooltip();
-                tooltip.setShowDelay(Duration.millis(250));
-                int height = utxoEntry.getHashIndex().getHeight();
-                tooltip.setText(height > 0 ? Integer.toString(height) : "Mempool");
-                TooltipUtil.setTooltip(this, tooltip);
             }
             setGraphic(null);
         }

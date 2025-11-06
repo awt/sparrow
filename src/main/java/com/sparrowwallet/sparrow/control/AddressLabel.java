@@ -46,7 +46,6 @@ public class AddressLabel extends IdLabel {
     private void setAddressAsText(Address address) {
         if(address != null) {
             tooltip.setText(address.getScriptType() + " " + Utils.bytesToHex(address.getOutputScriptData()));
-            TooltipUtil.setTooltip(this, tooltip);
             setContextMenu(contextMenu);
             setText(address.toString());
         }

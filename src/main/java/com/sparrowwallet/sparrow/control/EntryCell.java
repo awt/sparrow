@@ -81,17 +81,6 @@ public class EntryCell extends TreeTableCell<Entry, Entry> implements Confirmati
                     setContextMenu(new TransactionContextMenu(date, transactionEntry.getBlockTransaction()));
                 }
 
-                Tooltip tooltip = new Tooltip();
-                tooltip.setShowDelay(Duration.millis(250));
-                tooltip.setText(getTooltip(transactionEntry));
-                TooltipUtil.setTooltip(this, tooltip);
-
-                if(transactionEntry.getBlockTransaction().getHeight() <= 0) {
-                    tooltip.setOnShowing(event -> {
-                        tooltip.setText(getTooltip(transactionEntry));
-                    });
-                }
-
                 HBox actionBox = new HBox();
                 actionBox.getStyleClass().add("cell-actions");
                 Button viewTransactionButton = new Button("");
@@ -126,10 +115,6 @@ public class EntryCell extends TreeTableCell<Entry, Entry> implements Confirmati
                 Address address = nodeEntry.getAddress();
                 setText(address.toString());
                 setContextMenu(new AddressContextMenu(address, nodeEntry.getOutputDescriptor(), nodeEntry, true, getTreeTableView()));
-                Tooltip tooltip = new Tooltip();
-                tooltip.setShowDelay(Duration.millis(250));
-                tooltip.setText(nodeEntry.getNode().toString());
-                TooltipUtil.setTooltip(this, tooltip);
                 getStyleClass().add("address-cell");
 
                 HBox actionBox = new HBox();
@@ -166,10 +151,6 @@ public class EntryCell extends TreeTableCell<Entry, Entry> implements Confirmati
             } else if(entry instanceof HashIndexEntry hashIndexEntry) {
                 setText(hashIndexEntry.getDescription());
                 setContextMenu(getTreeTableView().getStyleClass().contains("bip47") ? null : new HashIndexEntryContextMenu(getTreeTableView(), hashIndexEntry));
-                Tooltip tooltip = new Tooltip();
-                tooltip.setShowDelay(Duration.millis(250));
-                tooltip.setText(hashIndexEntry.getHashIndex().toString());
-                TooltipUtil.setTooltip(this, tooltip);
 
                 HBox actionBox = new HBox();
                 actionBox.getStyleClass().add("cell-actions");

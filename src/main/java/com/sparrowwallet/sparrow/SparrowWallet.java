@@ -100,10 +100,6 @@ public class SparrowWallet {
             Interface.set(Interface.TERMINAL);
         }
 
-        if(args.disableTooltips) {
-            com.sparrowwallet.sparrow.io.Config.get().setDisableTooltips(true);
-        }
-
         if(args.uiScale != null) {
             String scaleValue = args.uiScale;
             if(!scaleValue.endsWith("%")) {

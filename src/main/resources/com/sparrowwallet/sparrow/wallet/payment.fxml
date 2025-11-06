@@ -34,17 +34,11 @@
                 <StackPane>
                     <ComboBox fx:id="openWallets" />
                     <ComboBoxTextField fx:id="address" styleClass="address-text-field" comboProperty="$openWallets">
-                        <tooltip>
-                            <Tooltip text="Address, payment code or bitcoin: URI"/>
-                        </tooltip>
                     </ComboBoxTextField>
                 </StackPane>
             </Field>
             <Field text="Label:">
                 <TextField fx:id="label" promptText="Required">
-                    <tooltip>
-                        <Tooltip text="Required to label the transaction (privately in this wallet)"/>
-                    </tooltip>
                 </TextField>
             </Field>
             <Field text="Amount:">
@@ -61,17 +55,11 @@
                 <FiatLabel fx:id="fiatAmount" />
                 <Group managed="false" translateY="38">
                     <Label fx:id="amountStatus" text="Insufficient funds">
-                        <tooltip>
-                            <Tooltip text="Insufficient confirmed transaction value" />
-                        </tooltip>
                         <graphic>
                             <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="12" icon="EXCLAMATION_CIRCLE" styleClass="failure" />
                         </graphic>
                     </Label>
                     <Label fx:id="dustStatus" text="Amount too low">
-                        <tooltip>
-                            <Tooltip text="Amount below the Bitcoin network dust threshold for this address type" />
-                        </tooltip>
                         <graphic>
                             <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="12" icon="EXCLAMATION_CIRCLE" styleClass="failure" />
                         </graphic>

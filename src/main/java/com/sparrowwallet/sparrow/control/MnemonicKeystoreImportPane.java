@@ -94,7 +94,6 @@ public class MnemonicKeystoreImportPane extends MnemonicKeystorePane {
             generateNew();
         });
         generateButton.managedProperty().bind(generateButton.visibleProperty());
-        TooltipUtil.setTooltip(generateButton, new Tooltip("Generate a unique set of words that provide the seed for your wallet"));
 
         return List.of(generateButton);
     }
@@ -107,7 +106,6 @@ public class MnemonicKeystoreImportPane extends MnemonicKeystorePane {
         confirmButton.managedProperty().bind(confirmButton.visibleProperty());
         confirmButton.setVisible(false);
         confirmButton.setDefaultButton(true);
-        TooltipUtil.setTooltip(confirmButton, new Tooltip("Re-enter the generated word list to confirm your backup is correct"));
 
         calculateButton = new Button("Create Keystore");
         calculateButton.setDisable(true);
@@ -116,14 +114,12 @@ public class MnemonicKeystoreImportPane extends MnemonicKeystorePane {
             prepareImport();
         });
         calculateButton.managedProperty().bind(calculateButton.visibleProperty());
-        TooltipUtil.setTooltip(calculateButton, new Tooltip("Create the keystore from the provided word list"));
 
         backButton = new Button("Back");
         backButton.setOnAction(event -> {
             displayMnemonicCode();
         });
         backButton.managedProperty().bind(backButton.visibleProperty());
-        TooltipUtil.setTooltip(backButton, new Tooltip("Go back to the generated word list"));
         backButton.setVisible(false);
 
         nextButton = new Button("Confirm Backup...");
@@ -131,7 +127,6 @@ public class MnemonicKeystoreImportPane extends MnemonicKeystorePane {
             confirmRecord();
         });
         nextButton.managedProperty().bind(nextButton.visibleProperty());
-        TooltipUtil.setTooltip(nextButton, new Tooltip("Confirm you have recorded the generated word list"));
         nextButton.setVisible(false);
         nextButton.setDefaultButton(true);
 
@@ -146,10 +141,8 @@ public class MnemonicKeystoreImportPane extends MnemonicKeystorePane {
             } catch(ImportException e) {
                 if(e.getCause() instanceof MnemonicException.MnemonicTypeException) {
                     invalidLabel.setText("Unsupported Electrum seed");
-                    TooltipUtil.setTooltip(invalidLabel, new Tooltip("Seeds created in Electrum do not follow the BIP39 standard. Import the Electrum wallet file directly."));
                 } else {
                     invalidLabel.setText("Invalid checksum");
-                    invalidLabel.setTooltip(null);
                 }
             }
         }

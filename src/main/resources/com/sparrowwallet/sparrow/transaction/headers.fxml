@@ -54,17 +54,11 @@
                             <graphic>
                                 <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="12" icon="COPY" />
                             </graphic>
-                            <tooltip>
-                                <Tooltip text="Copy the transaction id to the clipboard"/>
-                            </tooltip>
                         </ToggleButton>
                         <ToggleButton fx:id="openBlockExplorer" onAction="#openInBlockExplorer">
                             <graphic>
                                 <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="12" icon="UP_RIGHT_FROM_SQUARE" />
                             </graphic>
-                            <tooltip>
-                                <Tooltip text="Open transaction in the configured block explorer"/>
-                            </tooltip>
                         </ToggleButton>
                     </buttons>
                 </SegmentedButton>
@@ -127,9 +121,6 @@
                                 <graphic>
                                     <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="12" icon="EXCLAMATION_TRIANGLE" styleClass="future-warning" />
                                 </graphic>
-                                <tooltip>
-                                    <Tooltip text="Future block specified - transaction cannot be broadcast until this block height"/>
-                                </tooltip>
                             </Label>
                         </Field>
                         <Field fx:id="locktimeDateField" text="Date:">
@@ -138,9 +129,6 @@
                                 <graphic>
                                     <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="12" icon="EXCLAMATION_TRIANGLE" styleClass="future-warning" />
                                 </graphic>
-                                <tooltip>
-                                    <Tooltip text="Future date specified - transaction cannot be broadcast until this date"/>
-                                </tooltip>
                             </Label>
                         </Field>
                     </Fieldset>
@@ -323,9 +311,6 @@
                         <graphic>
                             <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="20" icon="ARROW_DOWN" />
                         </graphic>
-                        <tooltip>
-                            <Tooltip text="Connect to a server (bottom right toggle) to broadcast a transaction" />
-                        </tooltip>
                     </Button>
                     <Button fx:id="payjoinButton" defaultButton="true" HBox.hgrow="ALWAYS" text="Get Payjoin Transaction" contentDisplay="TOP" wrapText="true" textAlignment="CENTER" onAction="#getPayjoinTransaction">
                         <graphic>

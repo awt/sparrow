@@ -34,9 +34,6 @@
                             <graphic>
                                 <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="12" icon="ROBOT" />
                             </graphic>
-                            <tooltip>
-                                <Tooltip text="Retrieves and claims the PayNym for this wallet" />
-                            </tooltip>
                         </Button>
                         <ProgressIndicator fx:id="retrievePayNymProgress" />
                     </HBox>
@@ -48,9 +45,6 @@
                                 <graphic>
                                     <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="12" icon="QRCODE" />
                                 </graphic>
-                                <tooltip>
-                                    <Tooltip text="Show as QR code" />
-                                </tooltip>
                             </Button>
                         </HBox>
                     </HBox>
@@ -65,9 +59,6 @@
                                 <graphic>
                                     <Glyph fontFamily="Font Awesome 5 Free Solid" fontSize="12" icon="CAMERA" />
                                 </graphic>
-                                <tooltip>
-                                    <Tooltip text="Scan payment code" />
-                                </tooltip>
                             </Button>
                             <ProgressIndicator fx:id="findPayNym" />
                         </HBox>

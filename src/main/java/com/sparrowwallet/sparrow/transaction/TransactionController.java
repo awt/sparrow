@@ -10,7 +10,6 @@ import com.sparrowwallet.drongo.wallet.*;
 import com.sparrowwallet.sparrow.AppServices;
 import com.sparrowwallet.sparrow.EventManager;
 import com.sparrowwallet.sparrow.TransactionTabData;
-import com.sparrowwallet.sparrow.control.TooltipUtil;
 import com.sparrowwallet.sparrow.control.TransactionHexArea;
 import com.sparrowwallet.sparrow.event.*;
 import com.sparrowwallet.sparrow.io.Config;
@@ -173,13 +172,6 @@ public class TransactionController implements Initializable {
                     Address address = null;
                     if(form instanceof IndexedTransactionForm indexedForm) {
                         address = indexedForm.getAddress();
-                    }
-
-                    if(address != null) {
-                        Tooltip tooltip = new Tooltip(label.getText() + (label.getText().equals(address.toString()) ? "" : "\n" + address));
-                        tooltip.setMaxWidth(transactionMasterDetail.getWidth());
-                        tooltip.setWrapText(true);
-                        TooltipUtil.setTooltip(label, tooltip);
                     }
 
                     if(form.getSigningWallet() != null) {

@@ -45,16 +45,6 @@ class LabelCell extends TextFieldTreeTableCell<Entry, String> implements Confirm
 
             setText(label);
             setContextMenu(new LabelContextMenu(entry, label));
-
-            double width = label == null || label.length() < 20 ? 0.0 : TextUtils.computeTextWidth(getFont(), label, 0.0D);
-            if(width > getTableColumn().getWidth()) {
-                Tooltip tooltip = new Tooltip(label);
-                tooltip.setMaxWidth(getTreeTableView().getWidth());
-                tooltip.setWrapText(true);
-                TooltipUtil.setTooltip(this, tooltip);
-            } else {
-                setTooltip(null);
-            }
         }
     }
 

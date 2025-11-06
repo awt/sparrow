@@ -1066,9 +1066,6 @@ public class AppController implements Initializable {
     }
 
     private void setServerToggleTooltip(Integer currentBlockHeight) {
-        Tooltip tooltip = new Tooltip(getServerToggleTooltipText(currentBlockHeight));
-        tooltip.setShowDuration(Duration.seconds(15));
-        TooltipUtil.setTooltip(serverToggle, tooltip);
     }
 
     private String getServerToggleTooltipText(Integer currentBlockHeight) {
@@ -1785,9 +1782,6 @@ public class AppController implements Initializable {
             subTabLabel.setGraphic(getSubTabGlyph(wallet));
             subTabLabel.setContentDisplay(ContentDisplay.TOP);
             subTabLabel.setAlignment(Pos.TOP_CENTER);
-            if(isSubTabLabelTruncated(subTabLabel, label)) {
-                TooltipUtil.setTooltip(subTabLabel, new Tooltip(label));
-            }
             subTab.setGraphic(subTabLabel);
             FXMLLoader walletLoader = new FXMLLoader(getClass().getResource("wallet/wallet.fxml"));
             subTab.setContent(walletLoader.load());
@@ -2044,10 +2038,6 @@ public class AppController implements Initializable {
             tabLabel.setMaxWidth(TAB_LABEL_MAX_WIDTH);
             tabLabel.setGraphic(glyph);
             tabLabel.setGraphicTextGap(5.0);
-            if(TextUtils.computeTextWidth(tabLabel.getFont(), tabName, 0.0D) > TAB_LABEL_MAX_WIDTH) {
-                Tooltip tooltip = new Tooltip(tabName);
-                TooltipUtil.setTooltip(tabLabel, tooltip);
-            }
             tab.setGraphic(tabLabel);
             tab.setContextMenu(getTabContextMenu(tab));
             tab.setClosable(true);
@@ -2311,11 +2301,6 @@ public class AppController implements Initializable {
             if(optLabel.isPresent()) {
                 String label = optLabel.get();
                 subTabLabel.setText(label);
-                if(isSubTabLabelTruncated(subTabLabel, label)) {
-                    TooltipUtil.setTooltip(subTabLabel, new Tooltip(label));
-                } else {
-                    subTabLabel.setTooltip(null);
-                }
 
                 Wallet renamedWallet = AppServices.get().getWallet(walletId);
                 renamedWallet.setLabel(label);
@@ -2457,9 +2442,7 @@ public class AppController implements Initializable {
     private void tabLabelAddFailure(Tab tab) {
         Label tabLabel = (Label)tab.getGraphic();
         WalletIcon walletIcon = (WalletIcon)tabLabel.getGraphic();
-        if(walletIcon.addFailure()) {
-            TooltipUtil.setTooltip(tabLabel, new Tooltip("Error loading transaction history from server"));
-        }
+        walletIcon.addFailure();
     }
 
     private void tabLabelStopAnimation(Wallet wallet) {

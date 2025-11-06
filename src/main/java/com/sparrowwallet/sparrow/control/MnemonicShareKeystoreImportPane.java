@@ -92,7 +92,6 @@ public class MnemonicShareKeystoreImportPane extends MnemonicKeystorePane {
             prepareImport();
         });
         calculateButton.managedProperty().bind(calculateButton.visibleProperty());
-        TooltipUtil.setTooltip(calculateButton, new Tooltip("Create the keystore from the provided shares"));
         calculateButton.setVisible(false);
 
         backButton = new Button("Back");
@@ -100,7 +99,6 @@ public class MnemonicShareKeystoreImportPane extends MnemonicKeystorePane {
             lastShare();
         });
         backButton.managedProperty().bind(backButton.visibleProperty());
-        TooltipUtil.setTooltip(backButton, new Tooltip("Display the last share added"));
         backButton.setVisible(currentShare > 0);
 
         nextButton = new Button("Next");
@@ -108,7 +106,6 @@ public class MnemonicShareKeystoreImportPane extends MnemonicKeystorePane {
             nextShare();
         });
         nextButton.managedProperty().bind(nextButton.visibleProperty());
-        TooltipUtil.setTooltip(nextButton, new Tooltip("Add the next share"));
         nextButton.visibleProperty().bind(calculateButton.visibleProperty().not());
         nextButton.setDefaultButton(true);
         nextButton.setDisable(true);
@@ -167,18 +164,14 @@ public class MnemonicShareKeystoreImportPane extends MnemonicKeystorePane {
                 complete = true;
             } catch(MnemonicException e) {
                 invalidLabel.setText(e.getTitle());
-                TooltipUtil.setTooltip(invalidLabel, new Tooltip(e.getMessage()));
             } catch(Slip39.Slip39ProgressException e) {
                 validSet = true;
                 invalidLabel.setText(e.getTitle());
-                TooltipUtil.setTooltip(invalidLabel, new Tooltip(e.getMessage()));
             } catch(ImportException e) {
                 if(e.getCause() instanceof MnemonicException mnemonicException) {
                     invalidLabel.setText(mnemonicException.getTitle());
-                    TooltipUtil.setTooltip(invalidLabel, new Tooltip(mnemonicException.getMessage()));
                 } else {
                     invalidLabel.setText("Import Error");
-                    TooltipUtil.setTooltip(invalidLabel, new Tooltip(e.getMessage()));
                 }
             }
         }

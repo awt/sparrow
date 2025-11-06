@@ -46,9 +46,6 @@
                                 <graphic>
                                     <Glyph fontFamily="Font Awesome 5 Free Solid" icon="ARROW_CIRCLE_DOWN" fontSize="12" />
                                 </graphic>
-                                <tooltip>
-                                    <Tooltip text="Export transactions as CSV" />
-                                </tooltip>
                             </Button>
                         </Field>
                     </Fieldset>
