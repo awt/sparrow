@@ -147,6 +147,23 @@ public class KeystoreController extends WalletFormController implements Initiali
         displayXpubQR.managedProperty().bind(displayXpubQR.visibleProperty());
         displayXpubQR.visibleProperty().bind(scanXpubQR.visibleProperty().not());
 
+        // Set tooltips programmatically to respect the --disable-tooltips flag
+        TooltipUtil.setTooltip(viewSeedButton, new Tooltip("View mnemonic seed words"));
+        TooltipUtil.setTooltip(viewKeyButton, new Tooltip("View master private key"));
+        TooltipUtil.setTooltip(exportButton, new Tooltip("Export this keystore as a signer for a multisig wallet"));
+        TooltipUtil.setTooltip(scanXpubQR, new Tooltip("Scan a QR code"));
+        TooltipUtil.setTooltip(displayXpubQR, new Tooltip("Display as a QR code"));
+
+        // Set tooltips for cardServiceButtons - these need to be set after the buttons are created
+        cardServiceButtons.getButtons().stream()
+                .filter(button -> button.getText().equals("Change Pin"))
+                .findFirst()
+                .ifPresent(button -> TooltipUtil.setTooltip(button, new Tooltip("Change the PIN of the current card")));
+        cardServiceButtons.getButtons().stream()
+                .filter(button -> button.getText().equals("Backup"))
+                .findFirst()
+                .ifPresent(button -> TooltipUtil.setTooltip(button, new Tooltip("Backup the current card")));
+
         updateType(keystore.isValid() && !getWalletForm().getWallet().isValid());
 
         label.setText(keystore.getLabel());
@@ -235,7 +252,7 @@ public class KeystoreController extends WalletFormController implements Initiali
 
             xpubField.setText(Network.get().getXpubHeader().getDisplayName() + " / " + header.getDisplayName() + ":");
             switchXpubHeader.setDisable(false);
-            switchXpubHeader.setTooltip(new Tooltip("Show as " + header.getDisplayName()));
+            TooltipUtil.setTooltip(switchXpubHeader, new Tooltip("Show as " + header.getDisplayName()));
         } else {
             xpubField.setText(Network.get().getXpubHeader().getDisplayName() + ":");
             switchXpubHeader.setDisable(true);
@@ -305,7 +322,7 @@ public class KeystoreController extends WalletFormController implements Initiali
         backupButton.setDisable(!keystore.getWalletModel().supportsBackup());
 
         importButton.setText(keystore.getSource() == KeystoreSource.SW_WATCH ? "Import..." : "Replace...");
-        importButton.setTooltip(new Tooltip(keystore.getSource() == KeystoreSource.SW_WATCH ? "Import a keystore from an external source" : "Replace this keystore with another source"));
+        TooltipUtil.setTooltip(importButton, new Tooltip(keystore.getSource() == KeystoreSource.SW_WATCH ? "Import a keystore from an external source" : "Replace this keystore with another source"));
 
         boolean editable = (keystore.getSource() == KeystoreSource.SW_WATCH);
         setEditable(fingerprint, editable);
@@ -631,11 +648,11 @@ public class KeystoreController extends WalletFormController implements Initiali
             if(!xpub.getText().startsWith(header.getName())) {
                 String otherPub = keystore.getExtendedPublicKey().getExtendedKey(header);
                 xpub.setText(otherPub);
-                switchXpubHeader.setTooltip(new Tooltip("Show as " + Network.get().getXpubHeader().getDisplayName()));
+                TooltipUtil.setTooltip(switchXpubHeader, new Tooltip("Show as " + Network.get().getXpubHeader().getDisplayName()));
             } else {
                 String xPub = keystore.getExtendedPublicKey().getExtendedKey();
                 xpub.setText(xPub);
-                switchXpubHeader.setTooltip(new Tooltip("Show as " + header.getDisplayName()));
+                TooltipUtil.setTooltip(switchXpubHeader, new Tooltip("Show as " + header.getDisplayName()));
             }
         }
     }

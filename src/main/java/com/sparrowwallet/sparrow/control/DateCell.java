@@ -51,7 +51,7 @@ public class DateCell extends TreeTableCell<Entry, Entry> {
                 tooltip.setShowDelay(Duration.millis(250));
                 int height = utxoEntry.getHashIndex().getHeight();
                 tooltip.setText(height > 0 ? Integer.toString(height) : "Mempool");
-                setTooltip(tooltip);
+                TooltipUtil.setTooltip(this, tooltip);
             }
             setGraphic(null);
         }

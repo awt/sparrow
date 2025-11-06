@@ -71,11 +71,11 @@ public class PayNymCell extends ListCell<PayNym> {
 
                 if(payNymController.isLinked(payNym)) {
                     Label linkedLabel = new Label("Linked", getLinkGlyph());
-                    linkedLabel.setTooltip(new Tooltip("You can send non-collaboratively to this contact."));
+                    TooltipUtil.setTooltip(linkedLabel, new Tooltip("You can send non-collaboratively to this contact."));
                     hBox.getChildren().add(linkedLabel);
                 } else {
                     Button linkButton = new Button("Link Contact", getLinkGlyph());
-                    linkButton.setTooltip(new Tooltip("Create a transaction that will enable you to send non-collaboratively to this contact."));
+                    TooltipUtil.setTooltip(linkButton, new Tooltip("Create a transaction that will enable you to send non-collaboratively to this contact."));
                     hBox.getChildren().add(linkButton);
                     linkButton.setOnAction(event -> {
                         linkButton.setDisable(true);

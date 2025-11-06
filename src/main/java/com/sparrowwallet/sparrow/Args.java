@@ -26,6 +26,12 @@ public class Args {
     @Parameter(names = { "--help", "-h" }, description = "Show usage", help = true)
     public boolean help;
 
+    @Parameter(names = { "--disable-tooltips" }, description = "Disable tooltips", arity = 0)
+    public boolean disableTooltips;
+
+    @Parameter(names = { "--ui-scale" }, description = "Set UI scale percentage (e.g., 85 for 85%)")
+    public String uiScale;
+
     public List<String> toParams() {
         List<String> params = new ArrayList<>();
 

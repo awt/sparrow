@@ -51,7 +51,7 @@ class LabelCell extends TextFieldTreeTableCell<Entry, String> implements Confirm
                 Tooltip tooltip = new Tooltip(label);
                 tooltip.setMaxWidth(getTreeTableView().getWidth());
                 tooltip.setWrapText(true);
-                setTooltip(tooltip);
+                TooltipUtil.setTooltip(this, tooltip);
             } else {
                 setTooltip(null);
             }

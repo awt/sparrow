@@ -4,6 +4,11 @@ cd `dirname $0`
 args="$*"
 args="${args%"${args##*[![:space:]]}"}"
 
+# Set _JAVA_OPTIONS if not already set
+if [ -z "$_JAVA_OPTIONS" ]; then
+  export _JAVA_OPTIONS="-Dglass.gtk.uiScale=85%"
+fi
+
 if [ -n "$args" ]
 then
   ./gradlew run --args="$args"

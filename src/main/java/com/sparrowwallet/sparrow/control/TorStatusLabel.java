@@ -37,7 +37,7 @@ public class TorStatusLabel extends Label {
         if(!Config.get().isUseProxy()) {
             torConnectionTest.cancel();
             if(AppServices.isTorRunning()) {
-                setTooltip(new Tooltip("Internal Tor proxy enabled"));
+                TooltipUtil.setTooltip(this, new Tooltip("Internal Tor proxy enabled"));
             }
         } else if(!torConnectionTest.isRunning()) {
             if(torConnectionTest.getState() == Worker.State.CANCELLED || torConnectionTest.getState() == Worker.State.FAILED) {
@@ -47,13 +47,13 @@ public class TorStatusLabel extends Label {
             torConnectionTest.setBackoffStrategy(null);
             torConnectionTest.setOnSucceeded(workerStateEvent -> {
                 getStyleClass().remove("failure");
-                setTooltip(new Tooltip("External Tor proxy enabled"));
+                TooltipUtil.setTooltip(this, new Tooltip("External Tor proxy enabled"));
             });
             torConnectionTest.setOnFailed(workerStateEvent -> {
                 if(!getStyleClass().contains("failure")) {
                     getStyleClass().add("failure");
                 }
-                setTooltip(new Tooltip("External Tor proxy error: " + workerStateEvent.getSource().getException().getMessage()));
+                TooltipUtil.setTooltip(this, new Tooltip("External Tor proxy error: " + workerStateEvent.getSource().getException().getMessage()));
                 log.warn("Failed to connect to external Tor proxy: " + workerStateEvent.getSource().getException().getMessage());
             });
             torConnectionTest.start();

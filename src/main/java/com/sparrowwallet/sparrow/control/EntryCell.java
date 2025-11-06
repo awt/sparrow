@@ -84,7 +84,7 @@ public class EntryCell extends TreeTableCell<Entry, Entry> implements Confirmati
                 Tooltip tooltip = new Tooltip();
                 tooltip.setShowDelay(Duration.millis(250));
                 tooltip.setText(getTooltip(transactionEntry));
-                setTooltip(tooltip);
+                TooltipUtil.setTooltip(this, tooltip);
 
                 if(transactionEntry.getBlockTransaction().getHeight() <= 0) {
                     tooltip.setOnShowing(event -> {
@@ -129,7 +129,7 @@ public class EntryCell extends TreeTableCell<Entry, Entry> implements Confirmati
                 Tooltip tooltip = new Tooltip();
                 tooltip.setShowDelay(Duration.millis(250));
                 tooltip.setText(nodeEntry.getNode().toString());
-                setTooltip(tooltip);
+                TooltipUtil.setTooltip(this, tooltip);
                 getStyleClass().add("address-cell");
 
                 HBox actionBox = new HBox();
@@ -169,7 +169,7 @@ public class EntryCell extends TreeTableCell<Entry, Entry> implements Confirmati
                 Tooltip tooltip = new Tooltip();
                 tooltip.setShowDelay(Duration.millis(250));
                 tooltip.setText(hashIndexEntry.getHashIndex().toString());
-                setTooltip(tooltip);
+                TooltipUtil.setTooltip(this, tooltip);
 
                 HBox actionBox = new HBox();
                 actionBox.getStyleClass().add("cell-actions");

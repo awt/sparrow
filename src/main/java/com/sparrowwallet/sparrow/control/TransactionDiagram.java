@@ -439,7 +439,7 @@ public class TransactionDiagram extends GridPane {
         tooltip.getStyleClass().add("transaction-tooltip");
         tooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
         tooltip.setShowDuration(Duration.INDEFINITE);
-        glyph.setTooltip(tooltip);
+        TooltipUtil.setTooltip(glyph, tooltip);
         stackPane.getChildren().addAll(pane, glyph);
 
         return stackPane;
@@ -537,7 +537,7 @@ public class TransactionDiagram extends GridPane {
                     tooltip.setMaxWidth(activeWindow.getWidth());
                 }
                 if(!tooltip.getText().isEmpty()) {
-                    label.setTooltip(tooltip);
+                    TooltipUtil.setTooltip(label, tooltip);
                 }
 
                 HBox inputBox = new HBox();
@@ -742,7 +742,7 @@ public class TransactionDiagram extends GridPane {
             if(activeWindow != null) {
                 recipientTooltip.setMaxWidth(activeWindow.getWidth());
             }
-            recipientLabel.setTooltip(recipientTooltip);
+            TooltipUtil.setTooltip(recipientLabel, recipientTooltip);
             HBox paymentBox = new HBox();
             paymentBox.setAlignment(Pos.CENTER_LEFT);
             paymentBox.getChildren().add(recipientLabel);
@@ -782,7 +782,7 @@ public class TransactionDiagram extends GridPane {
             changeTooltip.getStyleClass().add("change-label");
             changeTooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
             changeTooltip.setShowDuration(Duration.INDEFINITE);
-            changeLabel.setTooltip(changeTooltip);
+            TooltipUtil.setTooltip(changeLabel, changeTooltip);
             actionBox.getChildren().add(changeLabel);
 
             if(!isFinal()) {
@@ -792,7 +792,7 @@ public class TransactionDiagram extends GridPane {
                     EventManager.get().post(new ReplaceChangeAddressEvent(walletTx));
                 });
                 Tooltip replaceChangeTooltip = new Tooltip("Use next change address");
-                nextChangeAddressButton.setTooltip(replaceChangeTooltip);
+                TooltipUtil.setTooltip(nextChangeAddressButton, replaceChangeTooltip);
                 Label replaceChangeLabel = new Label("", nextChangeAddressButton);
                 replaceChangeLabel.getStyleClass().add("replace-change-label");
                 replaceChangeLabel.setVisible(false);
@@ -841,7 +841,7 @@ public class TransactionDiagram extends GridPane {
         feeTooltip.getStyleClass().add("fee-tooltip");
         feeTooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
         feeTooltip.setShowDuration(Duration.INDEFINITE);
-        feeLabel.setTooltip(feeTooltip);
+        TooltipUtil.setTooltip(feeLabel, feeTooltip);
 
         HBox feeBox = new HBox();
         feeBox.setAlignment(Pos.CENTER_LEFT);
@@ -882,7 +882,7 @@ public class TransactionDiagram extends GridPane {
         tooltip.setShowDelay(new Duration(TOOLTIP_SHOW_DELAY));
         tooltip.setShowDuration(Duration.INDEFINITE);
         tooltip.getStyleClass().add("transaction-tooltip");
-        txLabel.setTooltip(tooltip);
+        TooltipUtil.setTooltip(txLabel, tooltip);
 
         txPane.getChildren().add(txLabel);
         txPane.getChildren().add(createSpacer());

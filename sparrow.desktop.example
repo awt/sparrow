@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Sparrow Wallet (Custom)
+Comment=Secure Bitcoin wallet
+Exec=/home/awt/Projects/sparrow/build/jpackage/Sparrow/bin/Sparrow --ui-scale 85 --disable-tooltips
+Path=/home/awt/Projects/sparrow
+Icon=/home/awt/Projects/sparrow/src/main/resources/sparrow.png
+Terminal=false
+Categories=Finance;Network;Office;

@@ -24,7 +24,7 @@ public class HelpLabel extends Label {
         tooltip.setShowDelay(Duration.millis(500));
         getStyleClass().add("help-label");
 
-        Platform.runLater(() -> setTooltip(tooltip));
+        Platform.runLater(() -> TooltipUtil.setTooltip(this, tooltip));
     }
 
     private static Glyph getHelpGlyph() {

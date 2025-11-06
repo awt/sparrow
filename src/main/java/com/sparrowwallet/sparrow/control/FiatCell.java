@@ -59,7 +59,7 @@ public class FiatCell extends TreeTableCell<Entry, Number> {
 
                 setText(label);
                 setGraphic(null);
-                setTooltip(tooltip);
+                TooltipUtil.setTooltip(this, tooltip);
                 setContextMenu(contextMenu);
             } else {
                 setText(null);

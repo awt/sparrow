@@ -1,5 +1,6 @@
 package com.sparrowwallet.sparrow;
 
+import com.sparrowwallet.sparrow.control.TooltipUtil;
 import com.sparrowwallet.sparrow.control.UnlabeledToggleSwitch;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -54,7 +55,7 @@ public class WelcomeController {
         serverToggle.addEventFilter(MouseEvent.MOUSE_RELEASED, Event::consume);
         Tooltip tooltip = new Tooltip("Demonstration only - you are not connected!");
         tooltip.setShowDelay(Duration.ZERO);
-        serverToggle.setTooltip(tooltip);
+        TooltipUtil.setTooltip(serverToggle, tooltip);
         serverToggle.selectedProperty().addListener((observable, oldValue, newValue) -> {
             serverStatus.setText(newValue ? "Connected (demonstration only)" : "Offline");
         });

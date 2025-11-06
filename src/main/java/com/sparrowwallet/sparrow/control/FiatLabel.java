@@ -98,7 +98,7 @@ public class FiatLabel extends CopyableLabel {
             tooltip.setText("1 BTC = " + getCurrency().getSymbol() + " " + unitFormat.formatCurrencyValue(getBtcRate()));
 
             setText(label);
-            setTooltip(tooltip);
+            TooltipUtil.setTooltip(this, tooltip);
             setContextMenu(contextMenu);
         } else {
             setText("");

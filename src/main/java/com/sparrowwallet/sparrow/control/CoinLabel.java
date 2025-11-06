@@ -49,7 +49,7 @@ public class CoinLabel extends Label {
     }
 
     private void setValueAsText(Long value, BitcoinUnit bitcoinUnit) {
-        setTooltip(tooltip);
+        TooltipUtil.setTooltip(this, tooltip);
         setContextMenu(contextMenu);
 
         UnitFormat format = Config.get().getUnitFormat() == null ? UnitFormat.DOT : Config.get().getUnitFormat();

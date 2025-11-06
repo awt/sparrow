@@ -133,7 +133,7 @@ public class MessageSignDialog extends Dialog<ButtonBar.ButtonData> {
         address = new TextField();
         address.getStyleClass().add("id");
         address.setEditable(walletNode == null);
-        address.setTooltip(new Tooltip("Only singlesig addresses can sign"));
+        TooltipUtil.setTooltip(address, new Tooltip("Only singlesig addresses can sign"));
         addressField.getInputs().add(address);
 
         if(walletNode != null) {

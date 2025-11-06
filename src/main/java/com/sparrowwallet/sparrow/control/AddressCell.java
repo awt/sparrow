@@ -44,7 +44,7 @@ public class AddressCell extends TreeTableCell<Entry, UtxoEntry.AddressStatus> {
                 Tooltip tooltip = new Tooltip();
                 tooltip.setShowDelay(Duration.millis(250));
                 tooltip.setText(getTooltipText(utxoEntry, addressStatus.isDuplicate(), addressStatus.isDustAttack()));
-                setTooltip(tooltip);
+                TooltipUtil.setTooltip(this, tooltip);
                 getStyleClass().add("address-cell");
 
                 if(addressStatus.isDustAttack()) {
